@@ -1,0 +1,141 @@
+@import "./SCSS_Variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+/** File includes app wide css adjustments
+* This would be anything not constrained to a single component such as error text, <img> tag, site colors, etc.
+* SCSS Variables should be stored in the imported file above to be included in other scss files
+*/
+
+.App {
+    // Force the layout to be fullscreen
+    > .ant-layout {
+        height: 100vh;
+    }
+
+    // Give the layouts and content area the same color scheme
+    .ant-layout, .ant-layout-content {
+        // background-color: $layout-content-background;
+        color: $text-color-secondary;
+    }
+
+    // Content area padding, moves the content away from the edges
+    .ant-layout-content {
+        padding: 16px;
+        overflow-y: auto;
+    }
+
+    .content-background {
+        background-color: #fff;
+        // min-height: calc(100vh - ($layout-header-size + $header-padding + $header-padding)); 
+        padding: 24px;
+        overflow: auto;
+    }
+
+    .header {
+        height: $layout-header-size;
+        color: #ffffff;
+        font-size: 20;
+        padding-left: $header-padding;
+        padding-right: $header-padding;
+        // background-color: $primary-color;
+        background-color: $footer-color;
+
+        .header-logo {
+            width: 70px;
+            top: 50%;
+            position: 'absolute';
+        }
+
+        h4.header-text {
+            color: #fff;
+            margin: 0;
+            font-weight: 400;
+        }
+    }
+
+    .footer {
+        position: relative;
+        height: 230px;
+        display: flex;
+        margin-top: 24px;
+        justify-content: flex-end;
+        padding: 0;
+        align-items: center;
+        background-color: $footer-color;
+        overflow: hidden;
+
+        .footer-logo {
+            height: 230px;
+        }
+    
+        .footer-seal {
+            color: #000;
+            width: 100px;
+            position: absolute;
+    
+            .a {
+                fill: #000;
+            }
+        }
+    }
+}
+
+
+// I think the antd.css file is messing with me. SOMEHOW, the <h1> tag gets all garbled up. This fixes it
+h1 {
+    font-size: 2em;
+}
+
+// Makes the <Spinner> larger
+div.ant-spin.very-large-spinner >span {
+    height: 14vw;
+    width: 14vw;
+    > i {
+        height: 6vw;
+        width: 6vw;
+    }
+}
+// Centers the spinner, sort of
+.spinner-centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// https://stackoverflow.com/questions/356809/best-way-to-center-a-div-on-a-page-vertically-and-horizontally
+div.centered {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+// Menu and Sub-menu icon adjustment - makes them larger
+.ant-menu-submenu, .ant-menu-item {
+    i.anticon {
+        font-size: 18px;
+    }
+}
+
+// Radio buttons
+.ant-radio-group {
+    &.vertical {
+        label.ant-radio-wrapper {
+            display: block;
+        }
+    }
+    &.left-padding {
+        padding-left: 24px;
+    }
+}
+
+// Errors on the table and tab elements
+.custom-error-message-bold {
+    color: red;
+    font-weight: 700;
+}
+.custom-error-message {
+    color: red;
+}

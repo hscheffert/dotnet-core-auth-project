@@ -1,0 +1,37 @@
+// Pulled directly from antd with some modifications: https://ant.design/docs/react/customize-theme#Ant-Design-Less-variables
+// Global colors
+$primary-color: #255a7c; // primary color for all components
+$link-color   : #1890ff; // link color
+$success-color: #52c41a; // success state color
+$warning-color: #faad14; // warning state color
+$error-color  : #f5222d; // error state color
+
+// Layout level colors (sidenav, header, footer, content)
+$layout-header-background : #ffffff; // header color
+$layout-sider-background  : #00ae1f; // side nav color
+$layout-sider-selected    : #187f1f; // side nav selected color
+// If you want a blue side nav, use these instead
+// $layout-sider-background  : #00aeef; // side nav color
+// $layout-sider-selected    : #187fff; // side nav selected color
+
+
+$layout-content-background: #fafafa; // content color rgb(240, 242, 245);
+$footer-color: #4bacc6;
+
+$layout-header-size: 84px; // header size
+$header-padding: 24px;
+$layout-footer-size: 64px; // footer size on layouts that include it
+
+// Text on Light Background
+$heading-color       : rgba(0, 0, 0, .85); // heading text color
+$text-color          : rgba(0, 0, 0, .65); // major text color
+$text-color-secondary: rgba(0, 0, 0, .80); // secondary text color
+$disabled-color      : rgba(0, 0, 0, .25); // disable state color
+
+// Text on Dark Background
+$heading-color-dark        : rgba(255, 255, 255, .15); // heading text color
+$text-color-dark           : rgba(255, 255, 255, .35); // major text color on a dark background
+$text-color-secondary-dark : rgba(255, 255, 255, .55); // secondary text color on a dark background
+
+// Misc
+$font-size-base: 14px; // major text font size

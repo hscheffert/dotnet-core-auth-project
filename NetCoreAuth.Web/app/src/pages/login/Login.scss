@@ -1,0 +1,22 @@
+.login-page {
+    margin-top: 30px;
+    position: relative;
+    align-content: center;
+    text-align: center;
+    color: white;
+    display: block;
+
+    > .ant-row {
+        > div {
+            background-color: #f2f2f2;
+            padding: 24px;
+
+            button {
+                width: 100%;
+            }
+            h2 {
+                color: black;
+            }
+        }
+    }
+}

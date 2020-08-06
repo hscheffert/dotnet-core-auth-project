@@ -1,0 +1,20 @@
+.datatable-header {
+    margin: 0 0 12px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    h2 {
+        flex: 1;
+    }
+
+    .ant-input-group-wrapper {
+        width: 400px;
+    }
+
+
+}
+
+.dataTable-button-bar .ant-btn:not(:last-child) {
+    margin-right: 10px;
+}
