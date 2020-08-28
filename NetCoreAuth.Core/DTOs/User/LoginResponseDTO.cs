@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NetCoreAuth.Core
+﻿namespace NetCoreAuth.Core
 {
     public class LoginResponseDTO
     {
@@ -9,6 +7,6 @@ namespace NetCoreAuth.Core
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

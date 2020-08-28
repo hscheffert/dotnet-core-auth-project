@@ -1,7 +1,7 @@
 import React from 'react';
 import { Space, notification, } from 'antd';
 import HistoryUtil from '../../utils/HistoryUtil';
-// import UserApiController from 'api/UserApiController';
+import UserApiController from 'api/UserApiController';
 import UserDTO from 'models/generated/UserDTO';
 import DataTable, { DataTableColumnProps, Filterer, Renderer } from '../shared/DataTable';
 import DataTableUtil from '../../utils/DataTableUtil';
@@ -38,7 +38,7 @@ class UserTable extends React.Component<UserTableProps, UserTableState> {
         ref={(ele: any) => this.dataTable = ele}
         serverSide={false}
         tableProps={{
-          rowKey: 'userId',
+          rowKey: 'id',
           loading: this.state.loading,
           sortDirections: ['ascend', 'descend'],
         }}
@@ -59,44 +59,24 @@ class UserTable extends React.Component<UserTableProps, UserTableState> {
   }
 
   private fetchData = async () => {
-    // this.setState({ loading: true });
-    // try {
-    //   const result = await UserApiController.getAll();
+    this.setState({ loading: true });
+    try {
+      const result = await UserApiController.getAll();
 
-    //   this.setState({
-    //     loading: false,
-    //     data: result.data,
-    //   });
+      this.setState({
+        loading: false,
+        data: result.data,
+      });
 
-    //   this.dataTable.refresh();
-    // } catch (err) {
-    //   this.setState({ loading: false });
-    //   console.log(err.message, err.response);
-    //   notification.error({
-    //     message: err.message,
-    //     description: err.description
-    //   });
-    // }
-  }
-
-  private handleActiveToggle = async (user: UserDTO) => {
-    // if (user.userId == null) return;
-
-    // this.setState({ loading: true });
-
-    // try {
-    //   const result = await UserApiController.toggle(user.userId);
-
-    //   this.setState({ loading: false });
-    //   this.fetchData();
-    // } catch (err) {
-    //   this.setState({ loading: false });
-    //   console.log(err.message, err.response);
-    //   notification.error({
-    //     message: err.message,
-    //     description: err.description
-    //   });
-    // }
+      this.dataTable.refresh();
+    } catch (err) {
+      this.setState({ loading: false });
+      console.log(err.message, err.response);
+      notification.error({
+        message: err.message,
+        description: err.description
+      });
+    }
   }
 
   private editUser = (userId: string | null) => {
@@ -110,10 +90,6 @@ class UserTable extends React.Component<UserTableProps, UserTableState> {
       }),
       DataTable.StandardColumns.Text('First Name', 'firstName'),
       DataTable.StandardColumns.Text('Email', 'email'),
-      DataTable.StandardColumns.Boolean('Is Supervisor', 'isSupervisor', Filterer.BooleanRadio, Renderer.BooleanYesEmpty),
-      DataTable.StandardColumns.Text('Supervisor', 'supervisorName'),
-      DataTableUtil.Columns.Active(this.handleActiveToggle),
-      DataTableUtil.Columns.Actions('userId', this.editUser)
     ];
   }
 }

@@ -4,9 +4,9 @@ import BaseAction from 'models/frontend/common/BaseAction';
 import { LoadingStatusType } from 'models/frontend/common/LoadingStatusType';
 import UserDTO from 'models/generated/UserDTO';
 import ActionResultDTO from 'models/frontend/common/ActionResultDTO';
-// import AuthController from 'api/AuthController';
 import AccountApiController from 'api/AccountApiController';
 import LoginDTO from 'models/generated/LoginDTO';
+import UserSecurityDTO from 'models/generated/UserSecurityDTO';
 
 export interface LoginUserAction extends BaseAction { type: 'LOGIN_USER'; data: UserDTO; }
 export interface ClearLoginUserAction extends BaseAction { type: 'CLEAR_LOGIN_STATE'; }
@@ -37,14 +37,14 @@ export default class UserAction {
      */
     public static SoftLogin(dispatch: Dispatch<KnownActions>) { //: Promise<ActionResultDTO> {
         dispatch({ type: "UPDATE_USER_STATE", data: "loading" } as UpdateUserStateAction);        
-        return AccountApiController.getCurrentUserName()
+        return AccountApiController.getCurrentUser()
             .then(result => this.Login_OnSuccess(dispatch, result as any))
             .catch(error => this.Login_OnFailure(dispatch, error));
     }
 
     private static Login_OnSuccess(dispatch: Dispatch<KnownActions>, response: AxiosResponse<UserDTO>): ActionResultDTO {
         console.log(response.data);
-        const data = UserDTO.create({
+        const data = UserSecurityDTO.create({
             ...response.data
         });
 

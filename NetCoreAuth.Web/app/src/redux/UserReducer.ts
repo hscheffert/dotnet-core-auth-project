@@ -7,7 +7,6 @@ export type UserState = {
     email: string;
     firstName: string;
     lastName: string;
-    isAdmin: boolean;
     /** Quick access to whether or not the user has logged in */
     isLoggedIn: boolean;
 
@@ -21,7 +20,6 @@ let DefaultUserState: UserState = {
     firstName: "",
     lastName: "",
     state: "none",
-    isAdmin: false,
     isLoggedIn: false
 };
 
@@ -30,11 +28,10 @@ export const UserReducer: Reducer<UserState, KnownActions> = (state: UserState =
         case "LOGIN_USER":
             return {
                 ...state,
-                id: action.data.userId,
+                id: action.data.id,
                 email: action.data.email,
                 firstName: action.data.firstName,
                 lastName: action.data.lastName,
-                isAdmin: action.data.isSupervisor,
                 isLoggedIn: true
             };
         case "CLEAR_LOGIN_STATE":
@@ -45,11 +42,10 @@ export const UserReducer: Reducer<UserState, KnownActions> = (state: UserState =
         case "UPDATE_USER":
             return {
                 ...state,
-                id: action.data.userId,
+                id: action.data.id,
                 email: action.data.email,
                 firstName: action.data.firstName,
                 lastName: action.data.lastName,
-                isAdmin: action.data.isSupervisor,
                 isLoggedIn: true,
             };
         case "UPDATE_USER_STATE":

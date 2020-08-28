@@ -4,23 +4,23 @@
 import * as moment from 'moment';
 import InterfaceConstructor from '../InterfaceConstructor';
 
-interface UserDTO { 
+interface UserSecurityDTO { 
     id: string | null;
-    email: string | null;
     firstName: string | null;
     lastName: string | null;
+    email: string | null;
 }
-const UserDTO: InterfaceConstructor<UserDTO> = {
+const UserSecurityDTO: InterfaceConstructor<UserSecurityDTO> = {
     create: (initValues?: {} | null | undefined) => {
         return Object.assign(
         {
             id: null,
-            email: null,
             firstName: null,
             lastName: null,
+            email: null,
         },
         initValues);
     }
 };
 
-export default UserDTO;
+export default UserSecurityDTO;

@@ -1,11 +1,14 @@
-﻿using NetCoreAuth.Core;
-using NetCoreAuth.Core.Exceptions;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
+using NetCoreAuth.Core;
+using NetCoreAuth.Core.DTOs;
+using NetCoreAuth.Core.Exceptions;
 using NetCoreAuth.Data.Model;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace NetCoreAuth.Web.Controllers
 {
@@ -15,7 +18,6 @@ namespace NetCoreAuth.Web.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-
 
         public AccountApiController(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
@@ -87,7 +89,7 @@ namespace NetCoreAuth.Web.Controllers
             }
             else
             {
-                // TODO: Do we need both of these?
+                // TODO: Do we need both of these? SignInAsync + PasswordSignInAsync
                 var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
 
                 await _signInManager.Context.SignInAsync(claimsPrincipal);
@@ -98,6 +100,7 @@ namespace NetCoreAuth.Web.Controllers
                 {
                     return Ok(new LoginResponseDTO()
                     {
+                        UserId = user.Id,
                         IsAuthenticated = true,
                         Message = string.Empty,
                         Email = dto.Email,
@@ -123,8 +126,8 @@ namespace NetCoreAuth.Web.Controllers
         }
 
         [HttpGet]
-        [Route("GetCurrentUserName")]
-        public IActionResult GetCurrentUserName()
+        [Route("GetCurrentUser")]
+        public async Task<IActionResult> GetCurrentUser()
         {
             var isUserSignedIn = _signInManager.IsSignedIn(User);
             var isUserAuthenticated = User.Identity.IsAuthenticated;
@@ -134,7 +137,17 @@ namespace NetCoreAuth.Web.Controllers
                 return Unauthorized();
             }
 
-            return Ok(User.Identity.Name);
+            // Why can't I use ClaimTypes.Email here? Has to be "email"
+            var email = User.FindFirstValue("email");
+            var user = await _userManager.FindByEmailAsync(email);
+
+            return Ok(new UserSecurityDTO
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            });
         }
     }
 }

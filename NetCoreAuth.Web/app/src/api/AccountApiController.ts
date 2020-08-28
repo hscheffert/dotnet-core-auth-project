@@ -22,10 +22,10 @@ class AccountApiControllerInternal {
         let url = this.RouteLogout();
         return HttpApi.RestRequest<any, void>(null, 'get', url, requestOptions);
     }
-    // get: api/account/GetCurrentUserName
-    public RouteGetCurrentUserName = () => `api/account/GetCurrentUserName`;
-    public getCurrentUserName(requestOptions?: HttpApiRequestOptions): Promise<AxiosResponse<void>> {
-        let url = this.RouteGetCurrentUserName();
+    // get: api/account/GetCurrentUser
+    public RouteGetCurrentUser = () => `api/account/GetCurrentUser`;
+    public getCurrentUser(requestOptions?: HttpApiRequestOptions): Promise<AxiosResponse<void>> {
+        let url = this.RouteGetCurrentUser();
         return HttpApi.RestRequest<any, void>(null, 'get', url, requestOptions);
     }
 }

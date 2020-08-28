@@ -41,23 +41,8 @@ class SideNav extends React.Component<SideNavProps, SideNavState> {
         });
     }
 
-    renderAdminOnlyMenuItems = () => {
-        const items = [          
-            { key: 'users', url: this.usersUrl, name: 'Users' }
-        ];
-        
-        return items.map(item => (
-            <Menu.Item key={item.key}>
-                <NavLink to={item.url}>
-                    {item.name}
-                </NavLink>
-            </Menu.Item>
-        ));
-    }
-
     render() {
-        const isAdmin = this.props.User.isAdmin;
-        const selectedKeys = [this.state.current];        
+        const selectedKeys = [this.state.current];
 
         return (
             <Sider width={200} className="sider">
@@ -72,7 +57,11 @@ class SideNav extends React.Component<SideNavProps, SideNavState> {
                             Home
                         </NavLink>
                     </Menu.Item>
-                    {isAdmin && this.renderAdminOnlyMenuItems()}
+                    <Menu.Item key="users">
+                        <NavLink to={this.usersUrl}>
+                            Users
+                        </NavLink>
+                    </Menu.Item>
                 </Menu>
             </Sider>
         );

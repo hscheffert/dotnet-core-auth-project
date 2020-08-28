@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Http;
 using NetCoreAuth.Data.Model;
 
 namespace NetCoreAuth.Web
@@ -103,6 +103,7 @@ namespace NetCoreAuth.Web
                 options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
             });
 
+            // hscheffert@qci.com, mypassword
             services.Configure<IdentityOptions>(options =>
             {
                 // Reduced password requirements

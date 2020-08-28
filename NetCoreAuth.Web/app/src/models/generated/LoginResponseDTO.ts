@@ -21,7 +21,7 @@ const LoginResponseDTO: InterfaceConstructor<LoginResponseDTO> = {
             firstName: null,
             lastName: null,
             email: null,
-            userId: "00000000-0000-0000-0000-000000000000",
+            userId: null,
         },
         initValues);
     }

@@ -29,6 +29,7 @@ const RouteLoader = <Switch>
 
     <LayoutComponent exact path={Routes.GET.LOGIN} allowAnonymous={true} component={LoginPage} layout={PublicLayout} />
 
+
     {/* Error Handling */}
     <LayoutComponent exact path={Routes.GET.ERROR_PAGE} component={ErrorPage} layout={PublicLayout} />
     <LayoutComponent exact path={Routes.GET.PAGE_NOT_FOUND} component={PageNotFound} layout={PublicLayout} />

@@ -98,9 +98,9 @@ class LayoutComponent extends React.Component<LayoutComponentProps, LayoutCompon
             return <Redirect to={Routes.GET.LOGIN} from={routerContext.location.pathname} />;
         }
 
-        if (userDoesNotHavePermissionForAdminPage) {
-            return <Redirect to={unauthorizedLocation} from={routerContext.location.pathname} />;
-        }
+        // if (userDoesNotHavePermissionForAdminPage) {
+        //     return <Redirect to={unauthorizedLocation} from={routerContext.location.pathname} />;
+        // }
 
         // Render the layout with the component. It is passed the routerContext, which contains some really nice page level information
         return (
