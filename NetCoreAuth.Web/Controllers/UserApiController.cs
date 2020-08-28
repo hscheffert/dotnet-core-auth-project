@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NetCoreAuth.Core.DTOs;
-using NetCoreAuth.Data.Model;
+using NetCoreAuth.Core.Services;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NetCoreAuth.Web.Controllers
@@ -12,22 +10,32 @@ namespace NetCoreAuth.Web.Controllers
     [ApiController]
     public class UserApiController : ControllerBase
     {
+        private readonly IUserService _userService;
 
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public UserApiController(UserManager<ApplicationUser> userManager)
+        public UserApiController(IUserService userService)
         {
-            _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpGet]
         [Route("GetAll")]
-        public async Task<IEnumerable<UserDTO>> GetAll()
-        {           
-            return UserDTO.Select(_userManager.Users)
-                .OrderBy(u => u.LastName)
-                .ThenBy(u => u.FirstName)
-                .ToList();
+        public IEnumerable<UserDTO> GetAll()
+        {
+            return _userService.GetAll();
+        }
+
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public async Task<UserDTO> GetById(string id)
+        {
+            return await _userService.GetById(id);
+        }
+
+        [HttpPost]
+        [Route("GetDataTableResponse")]
+        public TableResponseDTO<UserDTO> GetDataTableResponse(TableRequestDTO tableRequestDTO)
+        {
+            return _userService.GetDataTableResponse(tableRequestDTO);
         }
     }
 }

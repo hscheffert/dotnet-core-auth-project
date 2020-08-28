@@ -1,63 +1,43 @@
-﻿using NetCoreAuth.Core.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using NetCoreAuth.Business.DataTables;
+using NetCoreAuth.Core.DTOs;
 using NetCoreAuth.Core.Services;
 using NetCoreAuth.Data.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NetCoreAuth.Business.Services
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private readonly DB _db;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserService(DB db)
+        public UserService(DB db, UserManager<ApplicationUser> userManager)
         {
-            this._db = db;
+            _db = db;
+            _userManager = userManager;
         }
 
-        public List<UserDTO> GetAll()
+        public IEnumerable<UserDTO> GetAll()
         {
-            throw new NotImplementedException();
+            return UserDTO.Select(_userManager.Users)
+                .OrderBy(u => u.LastName)
+                .ThenBy(u => u.FirstName)
+                .ToList();
         }
 
-        public UserDTO GetByID(Guid id)
+        public async Task<UserDTO> GetById(string id)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(id);
+
+            return UserDTO.Select(user);
         }
-
-        //public UserDTO GetByID(Guid id)
-        //{
-
-        //    var dto = _db.User
-        //        .Where(x => x.UserId == id)
-        //        .Select(x => new UserDTO()
-        //        {
-        //            UserId = x.UserId,
-        //            FirstName = x.FirstName,
-        //            LastName = x.LastName,
-        //            Email = x.Email,
-        //        })
-        //        .FirstOrDefault();
-
-        //    return dto;
-        //}
-
-        //public List<UserDTO> GetAll()
-        //{
-        //    var dtos = _db.User
-        //        .Select(x => new UserDTO()
-        //        {
-        //            UserId = x.UserId,
-        //            FirstName = x.FirstName,
-        //            LastName = x.LastName,
-        //            Email = x.Email,
-        //        });            
-
-        //    return dtos
-        //        .OrderBy(x => x.LastName)
-        //        .ThenBy(x => x.FirstName)
-        //        .ToList();
-        //}
+       
+        public TableResponseDTO<UserDTO> GetDataTableResponse(TableRequestDTO tableRequest)
+        {
+            return new UserTableProvider(_userManager).ExecuteRequest(tableRequest);
+        }
     }
 }

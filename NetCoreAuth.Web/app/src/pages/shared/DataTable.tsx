@@ -5,9 +5,9 @@ import HistoryUtil from '../../utils/HistoryUtil';
 import NumberInput from './NumberInput';
 import Renderers from '../../utils/Renderers';
 import TableColumnState from '../../models/TableColumnState';
-import TableRequestDTO from '../../models/TableRequestDTO';
-import TableRequestFilterDTO from '../../models/TableRequestFilterDTO';
-import TableResponseDTO from '../../models/TableResponseDTO';
+import TableRequestDTO from '../../models/generated/TableRequestDTO';
+import TableRequestFilterDTO from '../../models/generated/TableRequestFilterDTO';
+import TableResponseDTO from '../../models/generated/TableResponseDTO';
 import Time24Hour from './Time24Hour';
 import {
     Button,

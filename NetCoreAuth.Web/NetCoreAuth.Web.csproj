@@ -72,6 +72,9 @@
     <TypeScriptCompile Include="app\src\models\frontend\common\ComponentProps.ts" />
     <TypeScriptCompile Include="app\src\models\frontend\common\KeyValueAndSimilar.ts" />
     <TypeScriptCompile Include="app\src\models\frontend\common\BaseAction.ts" />
+    <TypeScriptCompile Include="app\src\models\generated\TableRequestFilterDTO.ts" />
+    <TypeScriptCompile Include="app\src\models\generated\TableRequestDTO.ts" />
+    <TypeScriptCompile Include="app\src\models\generated\TableResponseDTO.ts" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

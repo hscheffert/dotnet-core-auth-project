@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NetCoreAuth.Business.Services;
+using NetCoreAuth.Core.Services;
 using NetCoreAuth.Data.Model;
 
 namespace NetCoreAuth.Web
@@ -36,6 +38,8 @@ namespace NetCoreAuth.Web
             {
                 configuration.RootPath = "app/build";
             });
+
+            services.AddTransient<IUserService, UserService>();
 
             services.AddHttpContextAccessor();
         }

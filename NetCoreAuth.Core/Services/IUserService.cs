@@ -1,12 +1,13 @@
-﻿using System;
+﻿using NetCoreAuth.Core.DTOs;
 using System.Collections.Generic;
-using NetCoreAuth.Core.DTOs;
+using System.Threading.Tasks;
 
 namespace NetCoreAuth.Core.Services
 {
     public interface IUserService
     {
-        public UserDTO GetByID(Guid id);
-        public List<UserDTO> GetAll();
+        Task<UserDTO> GetById(string id);
+        IEnumerable<UserDTO> GetAll();
+        TableResponseDTO<UserDTO> GetDataTableResponse(TableRequestDTO tableRequest);
     }
 }
